@@ -20,6 +20,7 @@
 		90E82FE127B1B41E005DFB26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90E82FE427B1B41E005DFB26 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		90E82FE627B1B41E005DFB26 /* YamahaController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YamahaController.entitlements; sourceTree = "<group>"; };
+		90E82FEC27B957EA005DFB26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +53,7 @@
 		90E82FDC27B1B41C005DFB26 /* YamahaController */ = {
 			isa = PBXGroup;
 			children = (
+				90E82FEC27B957EA005DFB26 /* Info.plist */,
 				90E82FDD27B1B41C005DFB26 /* YamahaControllerApp.swift */,
 				90E82FDF27B1B41C005DFB26 /* ContentView.swift */,
 				90E82FE127B1B41E005DFB26 /* Assets.xcassets */,
@@ -276,6 +278,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = YamahaController/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -303,6 +306,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = YamahaController/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
