@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90BCF58328A2F10800998A05 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BCF58228A2F10800998A05 /* ModelData.swift */; };
+		90BCF58528A2F15700998A05 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BCF58428A2F15700998A05 /* Device.swift */; };
+		90BCF58728A2F2FC00998A05 /* YamahaControllerCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BCF58628A2F2FC00998A05 /* YamahaControllerCommands.swift */; };
+		90E2180028A3060200ED31DE /* UDPBroadcastConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E217FE28A3060200ED31DE /* UDPBroadcastConnection.swift */; };
+		90E2180128A3060200ED31DE /* UDPBroadcastConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E217FF28A3060200ED31DE /* UDPBroadcastConnectionError.swift */; };
+		90E2180428A572EA00ED31DE /* YamahaControllerXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E2180328A572EA00ED31DE /* YamahaControllerXMLParser.swift */; };
+		90E2180628A58ECE00ED31DE /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E2180528A58ECE00ED31DE /* DeviceView.swift */; };
+		90E2180828B0FB6900ED31DE /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E2180728B0FB6900ED31DE /* Icon.swift */; };
+		90E2180C28BD1F4F00ED31DE /* DeviceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E2180B28BD1F4F00ED31DE /* DeviceRow.swift */; };
+		90E218102905B98E00ED31DE /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E2180F2905B98E00ED31DE /* Zone.swift */; };
+		90E218122905DE7F00ED31DE /* ZoneRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E218112905DE7F00ED31DE /* ZoneRow.swift */; };
+		90E218142905DFD800ED31DE /* ZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E218132905DFD800ED31DE /* ZoneView.swift */; };
+		90E710BE289D6413001008DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E710BD289D6413001008DC /* AppDelegate.swift */; };
 		90E82FDE27B1B41C005DFB26 /* YamahaControllerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E82FDD27B1B41C005DFB26 /* YamahaControllerApp.swift */; };
 		90E82FE027B1B41C005DFB26 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E82FDF27B1B41C005DFB26 /* ContentView.swift */; };
 		90E82FE227B1B41E005DFB26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E82FE127B1B41E005DFB26 /* Assets.xcassets */; };
@@ -14,13 +27,25 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		90BCF58228A2F10800998A05 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		90BCF58428A2F15700998A05 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		90BCF58628A2F2FC00998A05 /* YamahaControllerCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YamahaControllerCommands.swift; sourceTree = "<group>"; };
+		90E217FE28A3060200ED31DE /* UDPBroadcastConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPBroadcastConnection.swift; sourceTree = "<group>"; };
+		90E217FF28A3060200ED31DE /* UDPBroadcastConnectionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPBroadcastConnectionError.swift; sourceTree = "<group>"; };
+		90E2180328A572EA00ED31DE /* YamahaControllerXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YamahaControllerXMLParser.swift; sourceTree = "<group>"; };
+		90E2180528A58ECE00ED31DE /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
+		90E2180728B0FB6900ED31DE /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		90E2180B28BD1F4F00ED31DE /* DeviceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRow.swift; sourceTree = "<group>"; };
+		90E2180F2905B98E00ED31DE /* Zone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
+		90E218112905DE7F00ED31DE /* ZoneRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneRow.swift; sourceTree = "<group>"; };
+		90E218132905DFD800ED31DE /* ZoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneView.swift; sourceTree = "<group>"; };
+		90E710BD289D6413001008DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90E82FDA27B1B41C005DFB26 /* YamahaController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YamahaController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90E82FDD27B1B41C005DFB26 /* YamahaControllerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YamahaControllerApp.swift; sourceTree = "<group>"; };
 		90E82FDF27B1B41C005DFB26 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		90E82FE127B1B41E005DFB26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90E82FE427B1B41E005DFB26 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		90E82FE627B1B41E005DFB26 /* YamahaController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YamahaController.entitlements; sourceTree = "<group>"; };
-		90E82FEC27B957EA005DFB26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +59,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		90E2180228A3060C00ED31DE /* UDPBroadcastConnection */ = {
+			isa = PBXGroup;
+			children = (
+				90E217FE28A3060200ED31DE /* UDPBroadcastConnection.swift */,
+				90E217FF28A3060200ED31DE /* UDPBroadcastConnectionError.swift */,
+			);
+			path = UDPBroadcastConnection;
+			sourceTree = "<group>";
+		};
+		90E2180D28BD1F7200ED31DE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				90E82FDF27B1B41C005DFB26 /* ContentView.swift */,
+				90E2180528A58ECE00ED31DE /* DeviceView.swift */,
+				90E2180B28BD1F4F00ED31DE /* DeviceRow.swift */,
+				90E218112905DE7F00ED31DE /* ZoneRow.swift */,
+				90E218132905DFD800ED31DE /* ZoneView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		90E2180E28BD1F7D00ED31DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				90BCF58228A2F10800998A05 /* ModelData.swift */,
+				90E2180F2905B98E00ED31DE /* Zone.swift */,
+				90E2180328A572EA00ED31DE /* YamahaControllerXMLParser.swift */,
+				90BCF58428A2F15700998A05 /* Device.swift */,
+				90E2180728B0FB6900ED31DE /* Icon.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		90E82FD127B1B41C005DFB26 = {
 			isa = PBXGroup;
 			children = (
@@ -53,12 +111,15 @@
 		90E82FDC27B1B41C005DFB26 /* YamahaController */ = {
 			isa = PBXGroup;
 			children = (
-				90E82FEC27B957EA005DFB26 /* Info.plist */,
 				90E82FDD27B1B41C005DFB26 /* YamahaControllerApp.swift */,
-				90E82FDF27B1B41C005DFB26 /* ContentView.swift */,
+				90BCF58628A2F2FC00998A05 /* YamahaControllerCommands.swift */,
+				90E2180D28BD1F7200ED31DE /* Views */,
+				90E2180E28BD1F7D00ED31DE /* Model */,
 				90E82FE127B1B41E005DFB26 /* Assets.xcassets */,
 				90E82FE627B1B41E005DFB26 /* YamahaController.entitlements */,
 				90E82FE327B1B41E005DFB26 /* Preview Content */,
+				90E710BD289D6413001008DC /* AppDelegate.swift */,
+				90E2180228A3060C00ED31DE /* UDPBroadcastConnection */,
 			);
 			path = YamahaController;
 			sourceTree = "<group>";
@@ -99,7 +160,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					90E82FD927B1B41C005DFB26 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -141,8 +202,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90E710BE289D6413001008DC /* AppDelegate.swift in Sources */,
+				90E218142905DFD800ED31DE /* ZoneView.swift in Sources */,
+				90E2180128A3060200ED31DE /* UDPBroadcastConnectionError.swift in Sources */,
+				90E218122905DE7F00ED31DE /* ZoneRow.swift in Sources */,
+				90E2180C28BD1F4F00ED31DE /* DeviceRow.swift in Sources */,
+				90E2180628A58ECE00ED31DE /* DeviceView.swift in Sources */,
+				90BCF58328A2F10800998A05 /* ModelData.swift in Sources */,
 				90E82FE027B1B41C005DFB26 /* ContentView.swift in Sources */,
+				90E2180428A572EA00ED31DE /* YamahaControllerXMLParser.swift in Sources */,
+				90E2180028A3060200ED31DE /* UDPBroadcastConnection.swift in Sources */,
+				90BCF58728A2F2FC00998A05 /* YamahaControllerCommands.swift in Sources */,
 				90E82FDE27B1B41C005DFB26 /* YamahaControllerApp.swift in Sources */,
+				90BCF58528A2F15700998A05 /* Device.swift in Sources */,
+				90E2180828B0FB6900ED31DE /* Icon.swift in Sources */,
+				90E218102905B98E00ED31DE /* Zone.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +344,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YamahaController/YamahaController.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -280,6 +355,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YamahaController/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Need to connect to MusicCast devices";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -298,6 +374,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YamahaController/YamahaController.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -308,6 +385,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YamahaController/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Need to connect to MusicCast devices";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
