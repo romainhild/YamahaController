@@ -97,10 +97,9 @@ class Device: Hashable, Codable {
                 }
             }
             await self.getDeviceInfo()
-            await self.getFeatures()
             
         } catch {
-            print("error")
+            print("error get device description")
             return nil
         }
     }
@@ -111,10 +110,18 @@ class Device: Hashable, Codable {
         address = try values.decode(URL.self, forKey: .address)
         controlURL = try values.decode(URL.self, forKey: .controlURL)
         model = try values.decode(String.self, forKey: .model)
-        imagePath = try values.decode(URL?.self, forKey: .imagePath)
-        deviceInfo = try values.decode(DeviceInfo?.self, forKey: .deviceInfo)
-        if let imagePath = imagePath, let nsImage = NSImage(contentsOf: imagePath) {
-            self.image = Image(nsImage: nsImage)
+        do {
+            imagePath = try values.decode(URL?.self, forKey: .imagePath)
+            if let imagePath = imagePath, let nsImage = NSImage(contentsOf: imagePath) {
+                self.image = Image(nsImage: nsImage)
+            }
+        } catch {}
+        do {
+            deviceInfo = try values.decode(DeviceInfo?.self, forKey: .deviceInfo)
+        } catch {
+            Task {
+                await self.getDeviceInfo()
+            }
         }
     }
     
@@ -147,36 +154,27 @@ class Device: Hashable, Codable {
                 let decoder = JSONDecoder()
                 self.deviceInfo = try decoder.decode(DeviceInfo.self, from: data)
             } catch {
-                print("error")
+                print("error getting device info")
                 return
             }
         }
     }
     
-    func getFeatures() async {
-        guard #available(macOS 12.0, *) else { return }
+    func getFeatures() async -> [ZoneFeature] {
+        guard #available(macOS 12.0, *) else { return [] }
         if let url = URL(string: "system/getFeatures", relativeTo: self.controlURL) {
             do {
                 let (data, _) = try await URLSession.shared.data(from: url)
                 let decoder = JSONDecoder()
-                self.deviceFeatures = try decoder.decode(DeviceFeatures.self, from: data)
+                let deviceFeatures = try decoder.decode(DeviceFeatures.self, from: data)
+                return deviceFeatures.zone
             } catch {
-                print("error")
-                return
+                print("error getting device features")
+                return []
             }
+        } else {
+            return []
         }
-//        self.sendTask(path: "system/getFeatures", parameters: []) { data in
-//            do {
-//                if let datas = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-//                   let zones = datas["zone"] {
-//                    print(zones)
-//                } else {
-//                    print("no zones")
-//                }
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-//        }
     }
     
 //    func getStatus() {
@@ -204,8 +202,12 @@ class Device: Hashable, Codable {
         try container.encode(address, forKey: .address)
         try container.encode(controlURL, forKey: .controlURL)
         try container.encode(model, forKey: .model)
-        try container.encode(imagePath, forKey: .imagePath)
-        try container.encode(deviceInfo, forKey: .deviceInfo)
+        if let imagePath = self.imagePath {
+            try container.encode(imagePath, forKey: .imagePath)
+        }
+        if let deviceInfo = deviceInfo {
+            try container.encode(deviceInfo, forKey: .deviceInfo)
+        }
     }
 
     static func == (lhs: Device, rhs: Device) -> Bool {

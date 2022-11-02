@@ -12,16 +12,36 @@ struct ZoneName: Codable {
     var text: String
 }
 
-class Zone {
+struct ZoneStatus: Codable {
+    var response_code: Int
+    var power: String
+    var volume: Int
+    var mute: Bool
+    var max_volume: Int
+    var input: String
+}
+
+class Zone: Codable {
     var id: String
     @Published var text: String
-    @Published var devices: [Device]
+    @Published var devices: [String]
     var controlUrl: URL
+    var zoneFeatures: ZoneFeature
+    var zoneStatus: ZoneStatus?
 
-    init?(id: String, device: Device) async {
-        self.id = id
+    enum CodingKeys: String, CodingKey {
+        case id
+        case text
+        case devices
+        case controlUrl
+        case features
+    }
+    
+    init?(features: ZoneFeature, device: String, controlUrl: URL) async {
+        self.id = features.id
         self.devices = [device]
-        self.controlUrl = device.controlURL
+        self.controlUrl = controlUrl
+        self.zoneFeatures = features
         
         self.text = ""
         if let text = await self.getName() {
@@ -29,13 +49,52 @@ class Zone {
         } else {
             return nil
         }
+        Task {
+            await self.getStatus()
+        }
     }
     
     init(id: String, text: String, device: Device, controlUrl: URL) {
         self.id = id
         self.text = text
-        self.devices = [device]
+        if let deviceId = device.deviceInfo?.device_id {
+            self.devices = [deviceId]
+        } else {
+            self.devices = []
+        }
         self.controlUrl = controlUrl
+        self.zoneFeatures = ZoneFeature(id: id,
+                                        func_list: [],
+                                        input_list: [],
+                                        sound_program_list: [],
+                                        link_control_list: [],
+                                        link_audio_delay_list: [],
+                                        link_audio_quality_list: [],
+                                        range_step: [])
+        Task {
+            await self.getStatus()
+        }
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(String.self, forKey: .id)
+        text = try values.decode(String.self, forKey: .text)
+        devices = try values.decode([String].self, forKey: .devices)
+        controlUrl = try values.decode(URL.self, forKey: .controlUrl)
+        zoneFeatures = try values.decode(ZoneFeature.self, forKey: .features)
+        Task {
+            await self.getStatus()
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(text, forKey: .text)
+        try container.encode(devices, forKey: .devices)
+        try container.encode(controlUrl, forKey: .controlUrl)
+        try container.encode(zoneFeatures, forKey: .features)
     }
     
     func getName() async -> String? {
@@ -55,6 +114,20 @@ class Zone {
             }
         } else {
             return nil
+        }
+    }
+    
+    func getStatus() async {
+        guard #available(macOS 12.0, *) else { return }
+        if let url = URL(string: "\(self.id)/getStatus", relativeTo: self.controlUrl) {
+            do {
+                let (data, _) = try await URLSession.shared.data(from: url)
+                let decoder = JSONDecoder()
+                self.zoneStatus = try decoder.decode(ZoneStatus.self, from: data)
+            } catch {
+                print("error")
+                return
+            }
         }
     }
 }

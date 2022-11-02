@@ -16,25 +16,36 @@ final class ModelData: ObservableObject {
         }
     }
     @Published
-    var zones: [String: Zone] = [:]
+    var zones: [String: Zone] {
+        didSet {
+            self.saveZones()
+        }
+    }
     var devicesUrl: [URL] = []
     
     var broadcastConnection: UDPBroadcastConnection?
 
     init() {
+//        self.devices = [:]
+//        self.zones = [:]
         let decoder = JSONDecoder()
         if let encoded = UserDefaults.standard.object(forKey: "devices") as? Data {
-            print("devices found")
             if let devices = try? decoder.decode([String: Device].self, from: encoded) {
-                print("devices loaded")
-                print(devices)
                 self.devices = devices
             } else {
-                print("not decoded")
                 self.devices = [:]
             }
         } else {
             self.devices = [:]
+        }
+        if let encoded = UserDefaults.standard.object(forKey: "zones") as? Data {
+            if let zones = try? decoder.decode([String: Zone].self, from: encoded) {
+                self.zones = zones
+            } else {
+                self.zones = [:]
+            }
+        } else {
+            self.zones = [:]
         }
     }
     
@@ -96,18 +107,18 @@ final class ModelData: ObservableObject {
     
     func createDevice(url: URL) async {
         if let device = await Device(url: url),
-           let deviceInfo = device.deviceInfo,
-           let deviceFeatures = device.deviceFeatures {
+           let deviceInfo = device.deviceInfo {
             DispatchQueue.main.async {
                 self.devices[deviceInfo.device_id] = device
             }
-            for zoneId in deviceFeatures.zone {
-                if let zone = self.zones[zoneId.id] {
+            let zoneFeatures = await device.getFeatures()
+            for zoneFeature in zoneFeatures {
+                if let zone = self.zones[zoneFeature.id] {
                     DispatchQueue.main.async {
-                        zone.devices.append(device)
+                        zone.devices.append(deviceInfo.device_id)
                     }
                 } else {
-                    if let zone = await Zone(id: zoneId.id, device: device) {
+                    if let zone = await Zone(features: zoneFeature, device: deviceInfo.device_id, controlUrl: device.controlURL) {
                         DispatchQueue.main.async {
                             self.zones[zone.id] = zone
                         }
@@ -121,6 +132,13 @@ final class ModelData: ObservableObject {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(devices) {
             UserDefaults.standard.set(encoded, forKey: "devices")
+        }
+    }
+    
+    func saveZones() {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(zones) {
+            UserDefaults.standard.set(encoded, forKey: "zones")
         }
     }
 }

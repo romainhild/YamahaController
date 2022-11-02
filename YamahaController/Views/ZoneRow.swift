@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ZoneRow: View {
+    @EnvironmentObject var modelData: ModelData
     var zone: Zone
 
     var body: some View {
         VStack(alignment: .leading) {
             Text(zone.text).bold()
-            Text(zone.devices.map {$0.model}.joined(separator: ", "))
+            Text(zone.devices.map {modelData.devices[$0]?.model ?? ""}.joined(separator: ", "))
                 .font(.caption)
                 .foregroundColor(.secondary)
             
@@ -29,5 +30,6 @@ struct ZoneRow_Previews: PreviewProvider {
                             model: "",
                             image: Image(systemName: "star"))
         ZoneRow(zone: Zone(id: "main", text: "Salon", device: device, controlUrl: device.controlURL))
+            .environmentObject(ModelData())
     }
 }
