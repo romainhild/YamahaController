@@ -21,13 +21,14 @@ struct ZoneStatus: Codable {
     var input: String
 }
 
-class Zone: Codable {
+class Zone: Codable, ObservableObject {
     var id: String
     @Published var text: String
     @Published var devices: [String]
     var controlUrl: URL
     var zoneFeatures: ZoneFeature
-    var zoneStatus: ZoneStatus?
+    @Published var zoneStatus: ZoneStatus
+    @Published var volume: Int = 0
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -42,6 +43,7 @@ class Zone: Codable {
         self.devices = [device]
         self.controlUrl = controlUrl
         self.zoneFeatures = features
+        self.zoneStatus = ZoneStatus(response_code: 0, power: "off", volume: 0, mute: false, max_volume: 100, input: "")
         
         self.text = ""
         if let text = await self.getName() {
@@ -71,6 +73,7 @@ class Zone: Codable {
                                         link_audio_delay_list: [],
                                         link_audio_quality_list: [],
                                         range_step: [])
+        self.zoneStatus = ZoneStatus(response_code: 0, power: "off", volume: 0, mute: false, max_volume: 100, input: "")
         Task {
             await self.getStatus()
         }
@@ -83,6 +86,7 @@ class Zone: Codable {
         devices = try values.decode([String].self, forKey: .devices)
         controlUrl = try values.decode(URL.self, forKey: .controlUrl)
         zoneFeatures = try values.decode(ZoneFeature.self, forKey: .features)
+        self.zoneStatus = ZoneStatus(response_code: 0, power: "off", volume: 0, mute: false, max_volume: 100, input: "")
         Task {
             await self.getStatus()
         }
@@ -124,6 +128,10 @@ class Zone: Codable {
                 let (data, _) = try await URLSession.shared.data(from: url)
                 let decoder = JSONDecoder()
                 self.zoneStatus = try decoder.decode(ZoneStatus.self, from: data)
+                DispatchQueue.main.async {
+                    self.volume = self.zoneStatus.volume
+                }
+                print(self.volume)
             } catch {
                 print("error")
                 return

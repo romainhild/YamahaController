@@ -15,7 +15,7 @@ struct ContentView: View {
             List {
                 ForEach(Array(modelData.zones.values), id: \.id) { zone in
                     NavigationLink {
-                        ZoneView(zone: zone)
+                        ZoneView(zoneId: zone.id).environmentObject(modelData)
                     } label: {
                         ZoneRow(zone: zone)
                     }
